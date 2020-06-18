@@ -83,6 +83,7 @@ export default {
     handleLogin(){
       login(this.loginForm).then(res => {
         console.log(res);
+        this.$router.push({path: '/'})
       })
     },
     handleRegister(){
