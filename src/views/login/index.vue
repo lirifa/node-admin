@@ -82,7 +82,8 @@ export default {
   methods: {
     handleLogin(){
       login(this.loginForm).then(res => {
-        console.log(res);
+        console.log(res.token);
+        window.localStorage.setItem('xToken', res.token)
         this.$router.push({path: '/'})
       })
     },
