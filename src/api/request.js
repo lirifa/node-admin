@@ -13,7 +13,6 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-    console.log(store.getters);
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
@@ -47,7 +46,7 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 500 || res.code === 403 || res.code === 50014) {
+      if (res.code === 500 || res.code === 50014) {
         // to re-login
         Dialog.confirm({
           message: 'You have been logged out, you can cancel to stay on this page, or log in again',

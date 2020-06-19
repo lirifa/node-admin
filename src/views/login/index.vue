@@ -1,11 +1,16 @@
 <template>
-    <div class="login ignore">
-        <div class="login-box">
+    <div class="login">
+        <van-nav-bar
+                :title="$route.name"
+                left-arrow
+                @click-left="$router.back()"
+        />
+        <div class="login-box ignore">
             <van-tabs v-model="active" animated :border="false">
                 <van-tab title="登录">
                     <van-form @submit="handleLogin">
                         <van-field
-                                v-model="loginForm.username"
+                                v-model="loginForm.name"
                                 name="用户名"
                                 label="用户名"
                                 placeholder="用户名"
@@ -29,7 +34,7 @@
                 <van-tab title="注册">
                     <van-form @submit="handleRegister">
                         <van-field
-                                v-model="registerForm.username"
+                                v-model="registerForm.name"
                                 name="用户名"
                                 label="用户名"
                                 placeholder="用户名"
@@ -56,7 +61,7 @@
 </template>
 
 <script>
-import {login, register} from '@/api/login'
+import {login, register} from '@/api/user'
 import Vue from 'vue';
 import { Form, Field, Button,  Tab, Tabs } from 'vant';
 Vue.use(Form);
@@ -70,11 +75,11 @@ export default {
     return {
       active: '登录',
       loginForm: {
-        username: '',
+        name: '',
         password: ''
       },
       registerForm: {
-        username: '',
+        name: '',
         password: ''
       }
     }
@@ -83,13 +88,14 @@ export default {
     handleLogin(){
       login(this.loginForm).then(res => {
         console.log(res.token);
-        window.localStorage.setItem('xToken', res.token)
+        this.$store.commit('user/SET_TOKEN', res.token);
+        window.localStorage.setItem('xToken', res.token);
         this.$router.push({path: '/'})
       })
     },
     handleRegister(){
       register(this.registerForm).then(res => {
-        console.log(res);
+        this.$toast(res.msg)
       })
     }
   }

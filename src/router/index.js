@@ -21,7 +21,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/login')
+    component: () => import('../views/login')
+  },
+  {
+    path: '/upload',
+    name: 'Upload',
+    component: () => import('../views/qiniuUpload')
   }
 ]
 
