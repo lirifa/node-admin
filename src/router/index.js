@@ -27,6 +27,11 @@ const routes = [
     path: '/upload',
     name: 'Upload',
     component: () => import('../views/qiniuUpload')
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import('../views/test')
   }
 ]
 
