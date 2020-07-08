@@ -74,6 +74,11 @@
         overflow: hidden;
         background: #fff;
         box-shadow: 0 5px 10px rgba(53,65,93,0.1);
+        display: flex;
+        .wealth-item{
+            width: 33.33%;
+            text-align: center;
+        }
     }
 }
 </style>
